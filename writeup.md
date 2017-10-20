@@ -4,23 +4,7 @@ The goals / steps of this project are the following:
 * Make a pipeline that finds lane lines on the road
 * Reflect on your work in a written report
 
-[//]: # (Image References)
 
-[fig_example_raw]: ./test_images/whiteCarLaneSwitch.jpg "Original image"
-
-[fig_example_wy]: ./writeup/wy.jpg "White Yellow Threshold"
-
-[fig_mask_orig]: ./writeup/mask.jpg "Mask applied to original image"
-
-[fig_mask_wy]: ./writeup/mask_wy.jpg "Mask applied to white/yellow image"
-
-[fig_right_orig]: ./writeup/right_mask.jpg "Right mask applied to original image"
-
-[fig_right_wy]: ./writeup/right_mask_wy.jpg "Right mask applied to white/yellow image"
-
-[fig_line_huber]: ./writeup/line_huber.jpg "Huber regression on white/yellow image"
-
-[fig_final_lines]: ./writeup/final_lane_lines.jpg "Final lane line estimates overlayed on original image"
 
 ---
 
@@ -41,8 +25,8 @@ My pipeline consisted of 5 steps.
 
  I used the combined white/yellow mask as my input to the next step. An example of an original image and the resulting white/yellow mask is shown below:
 
- ![alt text][fig_example_raw]
- ![alt text][fig_example_wy]
+ <img src="./test_images/whiteCarLaneSwitch.jpg" alt="Original image" width="400px">
+ <img src="./writeup/wy.jpg" alt="White Yellow Threshold" width="400px">
 
 2. Next I took the location of white/yellow pixels and applied a mask that focused on the main lane region (or "region of interest"), similar to the example we went over in class. My mask has a few extra additions:
 
@@ -52,8 +36,9 @@ My pipeline consisted of 5 steps.
 
  An example of the mask I applied is shown below (the first picture shows the mask on the original image, while the second picture shows the mask on the white/yellow image):
 
- ![alt text][fig_mask_orig]
- ![alt text][fig_mask_wy]
+ <img src="./writeup/mask.jpg" alt="Mask applied to original image" width="400px">
+ <img src="./writeup/mask_wy.jpg" alt="Mask applied to white/yellow image" width="400px">
+
 
 3. I then tackled drawing a single line on the left and right lanes.
 
@@ -61,8 +46,9 @@ My pipeline consisted of 5 steps.
 
  For example, to draw the right line, I blacked out all the pixels on the left half of the image. I've shown an example below. The first figure is for illustrative purposes, and shows the mask applied to the original image. The second figure is what I actually used during my analysis, with the mask applied to the white/yellow image.
 
- ![alt text][fig_right_orig]
- ![alt text][fig_right_wy]
+ <img src="./writeup/right_mask.jpg" alt="Right mask applied to original image" width="400px">
+ <img src="./writeup/right_mask_wy.jpg" alt="Right mask applied to white/yellow image" width="400px">
+
 
 4. For each half of the image, I extracted the coordinates of the white/yellow pixels and calculated the best fit line. I was concerned about using classic linear regression, because there is sometimes noise from other features on the road (like the yellow squares on either side of the lane line we want to identify in the pictures above). I didn't want the line to jump around from frame to frame based on this noise.
 
@@ -72,13 +58,14 @@ My pipeline consisted of 5 steps.
 
  An example of the resulting line for the left side of the image is shown below:
 
- ![alt text][fig_line_huber]
+ <img src="./writeup/line_huber.jpg" alt="Huber regression on white/yellow image" width="400px">
+
 
 5. Because I calculated an equation for the "best fit" lane lines in another step, no real modification was needed to plot the final lane lines using draw_lines(). I simply increased the line thickness from 2 to 10.
 
  The final results for the example image are shown below:
 
- ![alt text][fig_final_lines]
+ <img src="./writeup/final_lane_lines.jpg" alt="Final lane line estimates overlayed on original image" width="400px">
 
 
 ### 2. Identify potential shortcomings with your current pipeline
